@@ -9,7 +9,19 @@ cache:
   - hexo-renderer-pandoc
 branches:
   only:
-    - master # build master branch only
+    - source # build master branch only
+
+ # Git Config
+ - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
+ - git config --global user.name "Manwcy"
+ - git config --global user.email "junnan0ma@gmail.com"
+
+ # SSH Setup
+ - openssl aes-256-cbc -K $encrypted_693585a97b8c_key -iv $encrypted_693585a97b8c_iv -in deploy_key.enc -out deploy_key -d
+ - eval "$(ssh-agent -s)"
+ - chmod 600 ./deploy_key
+ - ssh-add ./deploy_key
+
 install:
   - wget https://github.com/jgm/pandoc/releases/download/2.7/pandoc-2.7-1-amd64.deb
   - sudo dpkg -i ./pandoc-2.7-1-amd64.deb
@@ -23,6 +35,7 @@ deploy:
   skip-cleanup: true
   github-token: $BLOGTOKEN
   keep-history: true
+  target_branch: master # generate static files to master
   on:
-    branch: master
+    branch: sources # source code of hexo
   local-dir: public

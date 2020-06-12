@@ -9,7 +9,7 @@ cache:
   - hexo-renderer-pandoc
 branches:
   only:
-    - master # build master branch only
+    - sources # build sources branch only
 install:
   - wget https://github.com/jgm/pandoc/releases/download/2.7/pandoc-2.7-1-amd64.deb
   - sudo dpkg -i ./pandoc-2.7-1-amd64.deb
@@ -23,6 +23,7 @@ deploy:
   skip-cleanup: true
   github-token: $BLOGTOKEN
   keep-history: true
+  target_branch: master
   on:
-    branch: master
+    branch: sources
   local-dir: public

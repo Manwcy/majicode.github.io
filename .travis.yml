@@ -6,7 +6,13 @@ cache: npm
 branches:
   only:
     - master # build master branch only
+install:
+  - wget https://github.com/jgm/pandoc/releases/download/1.19.2.1/pandoc-1.19.2.1-1-amd64.deb
+  - sudo dpkg -i pandoc*.deb
+  - npm install -g hexo-cli
+  - npm install hexo-renderer-pandoc --save
 script:
+  - hexo clean
   - hexo generate # generate static files
 deploy:
   provider: pages

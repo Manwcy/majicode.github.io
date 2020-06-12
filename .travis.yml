@@ -2,7 +2,11 @@ sudo: false
 language: node_js
 node_js:
   - 10 # use nodejs v10 LTS
-cache: npm
+cache: 
+  - npm
+  - pandoc
+  - hexo-cli
+  - hexo-renderer-pandoc
 branches:
   only:
     - master # build master branch only
@@ -15,7 +19,7 @@ script:
   - hexo clean
   - hexo generate # generate static files
 deploy:
-  provider: pages
+  provider: release
   skip-cleanup: true
   github-token: $BLOGTOKEN
   keep-history: true

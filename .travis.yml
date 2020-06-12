@@ -19,7 +19,7 @@ script:
   - hexo clean
   - hexo generate # generate static files
 deploy:
-  provider: release
+  provider: pages
   skip-cleanup: true
   github-token: $BLOGTOKEN
   keep-history: true

@@ -560,7 +560,7 @@ comments:
   style: tabs
   # Choose a comment system to be displayed by default.
   # Available values: changyan | disqus | disqusjs | gitalk | livere | valine
-  active: gitalk
+  active:
   # Setting `true` means remembering the comment system selected by the visitor.
   storage: true
   # Lazyload all comment systems.
@@ -575,8 +575,8 @@ comments:
 
 # Disqus
 disqus:
-  enable: false
-  shortname:
+  enable: true
+  shortname: manwcy
   count: true
   #post_meta_order: 0
 
@@ -625,7 +625,7 @@ livere_uid: # <your_uid>
 # Gitalk
 # For more information: https://gitalk.github.io, https://github.com/gitalk/gitalk
 gitalk:
-  enable: true
+  enable: false
   github_id: Manwcy # GitHub repo owner
   repo: blog-comments # Repository name to store issues
   client_id: 3c3d238106cd49818d94 # GitHub Application Client ID

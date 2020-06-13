@@ -27,10 +27,6 @@
     position: relative;
     text-align: left;
     transition-property: background-color;
-
-    &:hover {
-      @extend .menu-item-active a;
-    }
   }
 
   +tablet-mobile() {
@@ -42,7 +38,7 @@
   .badge {
     background: $grey-light;
     border-radius: 10px;
-    color: white;
+    color: var(--content-bg-color);
     float: right;
     padding: 2px 5px;
     text-shadow: 1px 1px 0 rgba(0, 0, 0, .1);
@@ -51,7 +47,7 @@
 }
 
 if (!hexo-config('menu_settings.badges')) {
-  .main-menu .menu-item-active a::after {
+  .main-menu .menu-item-active::after {
     background: $grey;
     border-radius: 50%;
     content: ' ';

@@ -1,46 +1,41 @@
 ---
-title: HEXO - Hello World
-date: 2020/06/14 14:00:00
+title: First Blog
+date: 2020/06/14 16:00:00
 tags:
-- HEXO
 - Blog
 categories:
-- HEXO
+- Life
 ---
-Welcome to [Hexo](https://hexo.io/)! This is your very first post. Check [documentation](https://hexo.io/docs/) for more info. If you get any problems when using Hexo, you can find the answer in [troubleshooting](https://hexo.io/docs/troubleshooting.html) or you can ask me on [GitHub](https://github.com/hexojs/hexo/issues).
+
+**Hello World**
 
 <!-- more -->
 
-## Quick Start
+# 初衷
 
-### Create a new post
+搭建个博客呢，主要是想将自己在学习代码或者生活中遇到
+的问题和相应的解决办法记录下来。以便当再次遇到那些问
+题时自己可以快速地找到办法，而不是浪费时间再去搜索。
+因而自己也是可能会在这里贴出一大堆自己找到的、或者是
+摸索出来的可行的、自己能看懂的各种问题的解决办法。
 
-``` bash
-$ hexo new "My New Post"
-```
+除开各种遇到的问题和解决办法外，应该也会看心情写一点
+生活里去到的地方、拍到的照片，亦或是之前一直会有在写
+的影评，也算是希望自己有一点记录的习惯把。暂时不想将
+网址提交搜索引擎检索，也不想购买域名，先就打算将网站
+当作类似日记用吧，挂靠在Github上则是可以托管在网络上
+，方便自己编辑和搜索。
 
-More info: [Writing](https://hexo.io/docs/writing.html)
+# 进展
 
-### Run server
+其实一直都还挺想建个博客这样的，倒也不是说自己非常想
+输出观点，主要是希望利用网络的便捷提供自己一个方便检
+索的环境。恰好最近自己也硕士即将毕业，时间比较充裕，
+在网上随意搜索了一下相关的平台，就仓促决定利用Hexo和
+Github搭建一个博客。虽然这种方式搭建的博客没有如同
+Wordpress搭建博客的那种可见和便捷，甚至还时常容易
+遇到代码上的冲突，但头铁嘛，也是因为自己已经有Github
+的账户了，不想再麻烦去申请别的了。跌跌撞撞也算是搭建
+成功了，就希望之后能顺利地申请到博士，然后这个博客
+也能记录自己在博士期间的学习生活吧。
 
-``` bash
-$ hexo server
-```
-
-More info: [Server](https://hexo.io/docs/server.html)
-
-### Generate static files
-
-``` bash
-$ hexo generate
-```
-
-More info: [Generating](https://hexo.io/docs/generating.html)
-
-### Deploy to remote sites
-
-``` bash
-$ hexo deploy
-```
-
-More info: [Deployment](https://hexo.io/docs/one-command-deployment.html)

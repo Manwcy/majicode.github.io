@@ -78,6 +78,13 @@ search:
   limit: 10000
   content: true
 
+# Word Count
+symbols_count_time:
+  symbols: true
+  time: false
+  total_time: false
+  total_symbols: false
+
 # Date / Time format
 ## Hexo uses Moment.js to parse and display date
 ## You can customize the date format as defined in

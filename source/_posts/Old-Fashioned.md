@@ -1,6 +1,6 @@
 ---
-title: Cocktail-Preface
-data:2020/06/26 20:00:00
+title: Old-Fashioned
+date: 2020-06-27 13:12:24
 tags:
 - Cocktail
 categories:
@@ -38,7 +38,7 @@ Lemon and orange twists work as the granish.
 
 - 2 **ounces** bourbon
 
-- ***Garnish***: 1 **lemon** twist and 1 **orange** twist
+- ***Garnish*** : 1 **lemon** twist and 1 **orange** twist
 <!-- endtab -->
 
 <!-- tab Tricks -->
@@ -84,7 +84,7 @@ to further flavor the cocktail.
 
 + 1 **dash** Bitter Truth aromatic bitters
 
-+ ***Garnish***: 1 **orange** twist and 1 **lemon** twist
++ ***Garnish*** : 1 **orange** twist and 1 **lemon** twist
 <!-- endtab -->
 
 <!-- tab Tricks -->

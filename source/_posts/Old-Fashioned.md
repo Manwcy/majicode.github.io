@@ -58,7 +58,9 @@ without being too dominate.
     
     Here, the author gives the differences of various bourbons, consisting of 
     different mixs of sweet and spicy grains.  
+
     - More corn and the bourbon is sweeter
+
     - More rye and the bourbon is drier and spicier
 
 2. Second, instead of using a sugar cube, because of the dissolvability, a sugar syrup

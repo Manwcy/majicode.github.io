@@ -73,7 +73,7 @@ then rub it gently around the rim of the glass to perfume the cocktail and flavo
 sip. Express the **lemon twist** over the cocktail. Both twists are inserted into the drink
 to further flavor the cocktail.
 
-<% tabs Ideal %>
+{% tabs Ideal %}
 
 <!-- tab Materials -->
 + 2 **ounces** Elijah Craig Small Batch bourbon
@@ -95,4 +95,4 @@ Gently rub it around the rim of the glass and place it into the drink
 Express the lemon twist over the drink and place it into the drink
 <!-- endtab -->
 
-<% endtabs %>
+{% endtabs %}

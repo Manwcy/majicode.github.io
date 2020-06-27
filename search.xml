@@ -1,6 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Old-Fashioned</title>
+    <url>/2020/06/27/Old-Fashioned/</url>
+    <content><![CDATA[<h1 id="old-fashioned">Old-Fashioned</h1>
+<p>Collect some recipes of cocktails from book &lt;Cocktail Codex&gt;.</p>
+<p>This recipes are all from Chapter 1 of the book, named "Old-Fashioned"</p>
+<p>Old-Fashioned cocktail is considered as the "root recipe" from the book. The author thinks such kind of classic recipe like old-fashioned cocktail can be taken as a template, variations on this root recipe can extend to further techniques aimming to create personal and private cocktail. <a id="more"></a></p>
+<h2 id="root-recipe">Root Recipe</h2>
+<p>Author Devon Tarby gives the two recipes of old-fashioned cocktail in the book.</p>
+<h3 id="the-classic-old-fashioned">The Classic Old-Fashioned</h3>
+<p>The classic recipe of old-fashioned cocktail uses a sugar cube as the sweetness, herbal bitters as the seasoning, and of course, bourbon whiskey as the spirit. Lemon and orange twists work as the granish.</p>
+<div class="tabs" id="classic"><ul class="nav-tabs"><li class="tab active"><a href="#classic-1">Materials</a></li><li class="tab"><a href="#classic-2">Tricks</a></li></ul><div class="tab-content"><div class="tab-pane active" id="classic-1"><ul>
+<li><p>1 sugar cube</p></li>
+<li><p>2 <strong>dashes</strong> Angostura bitters</p></li>
+<li><p>2 <strong>ounces</strong> bourbon</p></li>
+<li><p><strong><em>Garnish</em></strong> : 1 <strong>lemon</strong> twist and 1 <strong>orange</strong> twist</p></li>
+</ul></div><div class="tab-pane" id="classic-2"><p>Muddle the <strong>suger cube</strong> and <strong>bitters</strong> in an Old-Fashioned glass.<br />
+Add the bourbon and 1 large ice cube and stir until chilled.<br />
+Garnish with the lemon and orange twist.</p></div></div></div>
+<h3 id="authors-ideal-old-fashioned">Author's Ideal Old-Fashioned</h3>
+<p>However, several drawbacks of the classic old-fashioned are mentioned.</p>
+<ol type="1">
+<li><p>First, the author select a new bourbon, which is considered to be distinct without being too dominate.</p>
+<p>Here, the author gives the differences of various bourbons, consisting of different mixs of sweet and spicy grains.</p>
+<ul>
+<li>More corn and the bourbon is sweeter</li>
+<li>More rye and the bourbon is drier and spicier</li>
+</ul></li>
+<li><p>Second, instead of using a sugar cube, because of the dissolvability, a sugar syrup makes sure that the sugar is distributed throughout the cocktail. Notes that denser Demerara Gum Syrup is a better recommendation.</p></li>
+<li><p>Third, an additional dash of <strong>Bitter Truth aromatic bitters</strong> is included to deepen the structure.</p></li>
+<li><p>Fourth, on the granishment. Squeeze, or express, the <strong>orange twist</strong> over the cocktail, then rub it gently around the rim of the glass to perfume the cocktail and flavor the first sip. Express the <strong>lemon twist</strong> over the cocktail. Both twists are inserted into the drink to further flavor the cocktail.</p></li>
+</ol>
+<div class="tabs" id="ideal"><ul class="nav-tabs"><li class="tab active"><a href="#ideal-1">Materials</a></li><li class="tab"><a href="#ideal-2">Tricks</a></li></ul><div class="tab-content"><div class="tab-pane active" id="ideal-1"><ul>
+<li><p>2 <strong>ounces</strong> Elijah Craig Small Batch bourbon</p></li>
+<li><p>1 <strong>teaspoon</strong> Demerara Gum Syrup</p></li>
+<li><p>2 <strong>dashes</strong> Angostura bitters</p></li>
+<li><p>1 <strong>dash</strong> Bitter Truth aromatic bitters</p></li>
+<li><p><strong><em>Garnish</em></strong> : 1 <strong>orange</strong> twist and 1 <strong>lemon</strong> twist</p></li>
+</ul></div><div class="tab-pane" id="ideal-2"><p>Stir all ingredients over ice<br />
+Strain into a double Old-Fashioned glass over 1 large ice cube<br />
+Express the orange twist over the drink<br />
+Gently rub it around the rim of the glass and place it into the drink Express the lemon twist over the drink and place it into the drink</p></div></div></div>
+]]></content>
+      <categories>
+        <category>Life</category>
+      </categories>
+      <tags>
+        <tag>Cocktail</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>First Blog</title>
     <url>/2020/06/14/hello-world/</url>
     <content><![CDATA[<p><strong>Hello World</strong></p>

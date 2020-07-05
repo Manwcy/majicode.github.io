@@ -3,6 +3,7 @@ title: Old-Fashioned
 date: 2020-06-27 13:12:24
 tags:
 - Cocktail
+- Old-Fashioned
 categories:
 - Life
 ---

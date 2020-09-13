@@ -32,7 +32,7 @@ Lemon and orange twists work as the granish.
 
 {% tabs Classic %}
 
-<!-- tab Materials -->
+<!-- tab Ingredients -->
 - 1 sugar cube
 
 - 2 **dashes** Angostura bitters
@@ -78,7 +78,7 @@ to further flavor the cocktail.
 
 {% tabs Ideal %}
 
-<!-- tab Materials -->
+<!-- tab Ingredients -->
 + 2 **ounces** Elijah Craig Small Batch bourbon
 
 + 1 **teaspoon** Demerara Gum Syrup

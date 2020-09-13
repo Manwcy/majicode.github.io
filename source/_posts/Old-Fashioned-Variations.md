@@ -31,7 +31,7 @@ licorice, and sarsaparilla notes.
 
 {% tabs Ned-Ryerson %}
 
-<!-- tab Materials -->
+<!-- tab Ingredients -->
 
 + 1 &#x00BD; ounces **Bulleit rye**
 
@@ -76,7 +76,7 @@ back from excessive sweetness.
 
 {% tabs Snowbird %}
 
-<!-- tab Materials-->
+<!-- tab Ingredients-->
 
 + 1&#x00BD; ounces Rittenhouse **rye**
 
@@ -119,7 +119,7 @@ Balance: Raisin-infused honey syrup
 
 {% tabs Coldgirdfever %}
 
-<!-- tab Materials -->
+<!-- tab Ingredients -->
 
 + 1 &#x00BE; ounces Famous Grouse scotch
 
@@ -163,7 +163,7 @@ Seasoning: A dash of bitters zips above big flavors together.
 
 {% tabs Deadpan %}
 
-<!-- tab Materials -->
+<!-- tab Ingredients -->
 
 + 1 ounce Pierre Ferrand 1840 Cognac
 
@@ -205,7 +205,7 @@ Sweetener: Maple syrup has a brightness which keeps the spirits from becoming to
 
 {% tabs autooldfashioned %}
 
-<!-- tab Materials -->
+<!-- tab Ingredients -->
 
 + &#x00BD; ounce George Dickel rye
 
@@ -254,7 +254,7 @@ Seasoning: A bit of savory seasoning, Salt Solution, brighten the flavors
 
 {% tabs Badsanta %}
 
-<!-- tab Materials -->
+<!-- tab Ingredients -->
 
 + 2 ounces *[Cocoa Butter-Infused Absolut Elyx Vodka](#cocoa-butter-infused-absolut-elyx-vodka)* (self-prepared)
 
@@ -298,7 +298,7 @@ next to a small glass of pilsner beer
 
 {% tabs Beachbonfire %}
 
-<!-- tab Materials -->
+<!-- tab Ingredients -->
 
 + 1 &#x00BD; ounces Elijah Craig Small Batch bourbon
 

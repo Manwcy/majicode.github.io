@@ -4,7 +4,7 @@ date: 2020-09-11 19:42:07
 tags:
 - Cocktail
 - Classic
-catagories:
+categories:
 - Life
 ---
 

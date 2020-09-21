@@ -3,7 +3,7 @@ title: 上进心
 date: 2020-09-08 15:37:59
 tags:
 - Blog
-catagories:
+categories:
 - Life
 ---
 

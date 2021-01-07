@@ -170,13 +170,13 @@ bright和vegetal的风味，很适合在[Margarita](#Margarita)这样的柑橘�
 
 这里一共是记录四款Tequila做基酒的龙舌兰鸡尾酒--
 
-    [Margarita](#margarita)
+- [Margarita](#margarita)
 
-    [Tequila Sunrise](#tequila-sunrise)
+- [Tequila Sunrise](#tequila-sunrise)
 
-    [Paloma](#paloma)
+- [Paloma](#paloma)
 
-    [La Rosita](#la-rosita)
+- [La Rosita](#la-rosita)
 
 
 ### Margarita

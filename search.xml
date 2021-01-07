@@ -104,6 +104,157 @@ Gently rub it around the rim of the glass and place it into the drink Express th
       </tags>
   </entry>
   <entry>
+    <title>webscarper</title>
+    <url>/2020/10/30/webscarper/</url>
+    <content><![CDATA[<p>Start to learn how to build and utilize web scraper.</p>
+<p>Here are some notes from book, "Web Scraping with Python" by Ryan Mitchell <a id="more"></a></p>
+<h1 id="building-scrapers">Building Scrapers</h1>
+<h2 id="first-web-scraper">First Web Scraper</h2>
+<p>General public tends to think of 'web scrapers' as:</p>
+<ul>
+<li><p>Retrieving HTML data from domain name</p></li>
+<li><p>Parsing the data for target information</p></li>
+<li><p>Storing the target information</p></li>
+<li><p>Optionally, moving to another page to repeat the precess</p></li>
+</ul>
+<p>So here the first scarper code is</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb1-1" title="1"><span class="im">from</span> urllib.request <span class="im">import</span> urlopen</a>
+<a class="sourceLine" id="cb1-2" title="2">html <span class="op">=</span> urlopen(<span class="st">&quot;http://pythonscraping.com/pages/page1.html&quot;</span>)</a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="bu">print</span>(html.read())</a></code></pre></div>
+<p>Even, for such an easy code, exceptions can be possible. Two main things can go wrong in this line:</p>
+<ul>
+<li><p>The page is not found on the server (or there was some erroe in retrieving it)</p></li>
+<li><p>The server is not found</p></li>
+</ul>
+<p>For different situations, exceptions can be handled as following:</p>
+<ul>
+<li><p><code>urlopen</code> will throw the generic exception <code>HTTPError</code></p>
+<p>To handle this, following code can be useful</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb2-1" title="1"><span class="cf">try</span>:</a>
+<a class="sourceLine" id="cb2-2" title="2">    html <span class="op">=</span> urlopen(<span class="st">&quot;http://www.pythonscraping.com/pages/page1.html&quot;</span>)</a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="cf">except</span> HTTPError <span class="im">as</span> e:</a>
+<a class="sourceLine" id="cb2-4" title="4">    <span class="bu">print</span>(e)</a>
+<a class="sourceLine" id="cb2-5" title="5">    <span class="co">#return null, break or do something else</span></a>
+<a class="sourceLine" id="cb2-6" title="6"><span class="cf">else</span>:</a>
+<a class="sourceLine" id="cb2-7" title="7">    <span class="co">#continue</span></a></code></pre></div></li>
+<li><p><code>urlopen</code> will return a <code>None</code> object, which is analogous to <code>null</code> in other programming languages.</p>
+<p>To handle this, following code can be referred:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb3-1" title="1"><span class="cf">if</span> html <span class="kw">is</span> <span class="va">None</span>:</a>
+<a class="sourceLine" id="cb3-2" title="2">    <span class="bu">print</span>(<span class="st">&quot;URL is not found&quot;</span>)</a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="cf">else</span>:</a>
+<a class="sourceLine" id="cb3-4" title="4">    <span class="co">#continue</span></a></code></pre></div></li>
+</ul>
+<p>Also, if a tag can not be found, at first, <code>none</code> will be returned. But if a tag is being retrieving, <code>AttributeError</code> will be thrown.</p>
+<p>Therefore, a much more sophisticated code for scraping looks like this, even though the check and handling of every error seems laborious.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb4-1" title="1"><span class="im">from</span> urllib.request <span class="im">import</span> urlopen</a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="im">from</span> urllib.error <span class="im">import</span> HTTPError</a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="im">from</span> bs4 <span class="im">import</span> BeautifulSoup</a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="kw">def</span> getTitle(url)</a>
+<a class="sourceLine" id="cb4-5" title="5">    <span class="cf">try</span>:</a>
+<a class="sourceLine" id="cb4-6" title="6">        html <span class="op">=</span> urlopen(url)</a>
+<a class="sourceLine" id="cb4-7" title="7">    <span class="cf">except</span> HTTPError <span class="im">as</span> e:</a>
+<a class="sourceLine" id="cb4-8" title="8">        <span class="cf">return</span> <span class="va">None</span></a>
+<a class="sourceLine" id="cb4-9" title="9">    <span class="cf">try</span>:</a>
+<a class="sourceLine" id="cb4-10" title="10">        bsObj <span class="op">=</span> BeautifulSoup(html.read())</a>
+<a class="sourceLine" id="cb4-11" title="11">        title <span class="op">=</span> bsObj.body.h1</a>
+<a class="sourceLine" id="cb4-12" title="12">    <span class="cf">except</span> <span class="pp">AttributeError</span> <span class="im">as</span> e:</a>
+<a class="sourceLine" id="cb4-13" title="13">        <span class="cf">return</span> <span class="va">None</span></a>
+<a class="sourceLine" id="cb4-14" title="14">    <span class="cf">return</span> title</a>
+<a class="sourceLine" id="cb4-15" title="15">title <span class="op">=</span> getTitle(<span class="st">&quot;http://www.pythonscraping.com/pages/page1.html&quot;</span>)</a>
+<a class="sourceLine" id="cb4-16" title="16"><span class="cf">if</span> title <span class="op">==</span> <span class="va">None</span>:</a>
+<a class="sourceLine" id="cb4-17" title="17">    <span class="bu">print</span>(<span class="st">&quot;Title could not be found&quot;</span>)</a>
+<a class="sourceLine" id="cb4-18" title="18"><span class="cf">else</span>:</a>
+<a class="sourceLine" id="cb4-19" title="19">    <span class="bu">print</span>(title)</a></code></pre></div>
+<h2 id="advanced-html-parsing">Advanced HTML Parsing</h2>
+<h3 id="find-and-findall">find() and findAll()</h3>
+<p><code>find()</code> and <code>findAll()</code> are the two functions to easily filter HTML pages to find lists of desired tags, or a single tag, based on their various attributes.</p>
+<pre><code>findAll(tag, attributes, recursive, text, limit, keywords)
+find(tag, attributes, recursive, text, keywords)</code></pre>
+<h3 id="objects">Objects</h3>
+<p>BeautifulSoup Objects contained in the <strong>BeautifulSoup</strong> library are:</p>
+<ul>
+<li><p>BeautifulSoup Objects</p></li>
+<li><p>Tag Objects</p></li>
+<li><p>NavigableString Objects</p></li>
+<li><p>Comment Objects</p></li>
+</ul>
+<h3 id="children-and-descendants">Children and descendants</h3>
+<p>When dealing with children and other descendants, <code>.children</code> tag and <code>.descendant</code> tag can be used to select the corresponding items.</p>
+<p>In the BeautifulSoup library, the difference between children and descendants is that children are always exactly the one tag below a parent, whereas descendants can be at any level in the tree below a parent.</p>
+<h3 id="siblings">Siblings</h3>
+<p><code>next_siblings()</code> function makes it trivial to collect data from tables, especially ones with title rows.</p>
+<p><code>next_siblings</code> and <code>previous_siblings</code> work in the similar way.</p>
+<h3 id="parents">Parents</h3>
+<p><code>.parent</code> which is related to the tree structure of the portion of HTML pages.</p>
+<h3 id="regular-expressions">Regular Expressions</h3>
+<p>Remember, python package <code>re</code> is necessary to be imported to support the regular expression function.</p>
+<p>A regular expression can be inserted as any arguement in a BeautifulSoup expression allowing a great deal of flexibility in finding target elements.</p>
+<p><strong>Detailed information on Regular Expressions</strong> will be given in a new post.</p>
+<p>(正则表达式似乎在许多编程语言中都有涉及，这里在做网络爬虫的时候，需要对特殊的语句形式进行分析)</p>
+<p>Here gives an example:</p>
+<pre><code>[A-Za-z0-9\._+]+@[A-Za-z]+\.(com|org|edu|net)</code></pre>
+<h3 id="attributes">Attributes</h3>
+<p>With tag objects, a python list of attributes can be automatically accessed by calling:</p>
+<p><code>myTag.attrs['src']</code></p>
+<p>whereas <code>myTag.attrs</code> usually outputs a dictionary object</p>
+<h3 id="lambda-expressions">Lambda Expressions</h3>
+<p>Using lambda functions in BeatuifulSoup, selectors can act as a great substitute for writing a regular expression, if writing a little code won't be much problem.</p>
+<p>Here gives an example:</p>
+<p><code>soup.findAll(lambda tag:len(tag.attrs) == 2)</code></p>
+<p>that retrieves all tags that have exactly two attributes.</p>
+<h3 id="other-libraries">Other Libraries</h3>
+<p>Besides <strong>BeautifulSoup</strong>, other widely used libraries are</p>
+<ul>
+<li><p><em>lxml</em></p>
+<p>Low level and heavily based on C. Steep learning curve while is very fast at parsing most HTML documents</p></li>
+<li><p><em>HTML Parser</em></p>
+<p>Python's built-in parsing library. No installation and extremely convenient to use.</p></li>
+</ul>
+<h2 id="start-to-crawl">Start to Crawl</h2>
+<h3 id="travelling-a-single-domain">Travelling a single domain</h3>
+<p>For example, to see a list of article URLs that the Wikipedia article on Kevin Bacon links to, the code should be like:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb7-1" title="1"><span class="im">from</span> urllib.request <span class="im">import</span> urlopen</a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="im">from</span> bs4 <span class="im">import</span> BeautifulSoup</a>
+<a class="sourceLine" id="cb7-3" title="3"><span class="im">import</span> re</a>
+<a class="sourceLine" id="cb7-4" title="4"></a>
+<a class="sourceLine" id="cb7-5" title="5">html <span class="op">=</span> urlopen(<span class="st">&quot;http://en.wikipedia.org/wiki/Kevin_Bacon&quot;</span>)</a>
+<a class="sourceLine" id="cb7-6" title="6">bsObj <span class="op">=</span> BeautifulSoup(html)</a>
+<a class="sourceLine" id="cb7-7" title="7"><span class="cf">for</span> link <span class="kw">in</span> bsObj.find(<span class="st">&quot;div&quot;</span>, {<span class="st">&quot;id&quot;</span>:<span class="st">&quot;bodyContent&quot;</span>}).findAll(<span class="st">&quot;a&quot;</span>,</a>
+<a class="sourceLine" id="cb7-8" title="8">                       href<span class="op">=</span>re.<span class="bu">compile</span>(<span class="st">&quot;^(/wiki)((?!:).)*$&quot;</span>))</a>
+<a class="sourceLine" id="cb7-9" title="9">    <span class="cf">if</span> <span class="st">&#39;href&#39;</span> <span class="kw">in</span> link.attrs:</a>
+<a class="sourceLine" id="cb7-10" title="10">        <span class="bu">print</span>(link.attrs[<span class="st">&#39;href&#39;</span>])</a></code></pre></div>
+<p>To have a script that finds all article links in one, hardcoded Wikipedia article, while interesting, is fairly useless in practice.</p>
+<ul>
+<li><p>Single function, <code>getlinks</code> that takes in a Wikipedia article URL of the form <code>/wiki/&lt;Article_Name&gt;</code> and returns a list of all linked article URLs in the same form</p></li>
+<li><p>A main function that calls <code>getlinks</code> with some starting article, chooses a random article link from the returned list and calls <code>getlinks</code> again. until we stop the program or until there are no article links found on the new page.</p></li>
+</ul>
+<p>CODE:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb8-1" title="1"><span class="im">from</span> urllib.request <span class="im">import</span> urlopen</a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="im">from</span> bs4 <span class="im">import</span> BeautifulSoup</a>
+<a class="sourceLine" id="cb8-3" title="3"><span class="im">import</span> datetime</a>
+<a class="sourceLine" id="cb8-4" title="4"><span class="im">import</span> random</a>
+<a class="sourceLine" id="cb8-5" title="5"><span class="im">import</span> re</a>
+<a class="sourceLine" id="cb8-6" title="6"></a>
+<a class="sourceLine" id="cb8-7" title="7">randowm.seed(datetime.datetime.now())</a>
+<a class="sourceLine" id="cb8-8" title="8"><span class="kw">def</span> getLinks(articleUrl):</a>
+<a class="sourceLine" id="cb8-9" title="9">    html <span class="op">=</span> urlopen(<span class="st">&quot;http://en.wikipedia.org&quot;</span><span class="op">+</span>articleUrl)</a>
+<a class="sourceLine" id="cb8-10" title="10">    bsObj <span class="op">=</span> BeautifulSoup(html)</a>
+<a class="sourceLine" id="cb8-11" title="11">    <span class="cf">return</span> bsObj.find(<span class="st">&quot;div&quot;</span>, {<span class="st">&quot;id:bodyContent&quot;</span>}).findAll(<span class="st">&quot;a&quot;</span>, href<span class="op">=</span>re.<span class="bu">compile</span>(<span class="st">&quot;^(/wiki/)((?!:).)*$&quot;</span>))</a>
+<a class="sourceLine" id="cb8-12" title="12">links <span class="op">=</span> getLinks(<span class="st">&quot;/wiki/Kevin_Bacon&quot;</span>)</a>
+<a class="sourceLine" id="cb8-13" title="13"><span class="cf">while</span> <span class="bu">len</span>(links) <span class="op">&gt;</span> <span class="dv">0</span>:</a>
+<a class="sourceLine" id="cb8-14" title="14">    newArticle <span class="op">=</span> links[random.randint(<span class="dv">0</span>, <span class="bu">len</span>(links)<span class="op">-</span><span class="dv">1</span>)].attrs[<span class="st">&quot;href&quot;</span>]</a>
+<a class="sourceLine" id="cb8-15" title="15">    <span class="bu">print</span>(newArticle)</a>
+<a class="sourceLine" id="cb8-16" title="16">    links <span class="op">=</span> getLinks(newArticle)</a></code></pre></div>
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>Webscarper</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Old-Fashioned Variations</title>
     <url>/2020/07/06/Old-Fashioned-Variations/</url>
     <content><![CDATA[<p>Some recipes, or "spec" (bartender slang for recipe), based on the root recipe, Old-Fashioned, are given in the book, &lt;Cocktail Codex&gt;.</p>
@@ -444,13 +595,12 @@ Gently rub it around the rim of the glass and place it into the drink Express th
 <h2 id="龙舌兰鸡尾酒">龙舌兰鸡尾酒</h2>
 <p>写了半天终究还是这部分像是比较实用，记录一些龙舌兰为基酒的经典调酒， 当作酒吧选酒及自己调酒的指南吧。当然其实如果说是调酒的话，大可将其他酒单 中的基酒换成Tequila，以制作自己喜欢的新版本。</p>
 <p>这里一共是记录四款Tequila做基酒的龙舌兰鸡尾酒--</p>
-<pre><code>[Margarita](#margarita)
-
-[Tequila Sunrise](#tequila-sunrise)
-
-[Paloma](#paloma)
-
-[La Rosita](#la-rosita)</code></pre>
+<ul>
+<li><p><a href="#margarita">Margarita</a></p></li>
+<li><p><a href="#tequila-sunrise">Tequila Sunrise</a></p></li>
+<li><p><a href="#paloma">Paloma</a></p></li>
+<li><p><a href="#la-rosita">La Rosita</a></p></li>
+</ul>
 <h3 id="margarita">Margarita</h3>
 <p>如果说龙舌兰有一款代表酒的话，应该就是<strong>玛格丽特</strong>(Margarita)没错了。 其有着标志性的盐边，来搭配Tequila的饮用(但是上次在那家酒吧点的Margarita， 似乎没有盐边？是点的Margarita没错吧？喝多了记不清的...应该没错？)。</p>
 <p>按照书中的分类呢，这款酒是归属于Sidecar类的，或者说也是与Sidecar非常类似的一款酒。</p>
@@ -557,6 +707,240 @@ Gently rub it around the rim of the glass and place it into the drink Express th
 <p>Express the orange twist over the drink, gently rub it around the rim of the glass and place it into the drink</p>
 <p><strong>GARNISH</strong></p>
 <p>1 orange twist</p></div></div></div>
+]]></content>
+      <categories>
+        <category>Life</category>
+      </categories>
+      <tags>
+        <tag>Cocktail</tag>
+        <tag>Classic</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Classic-[Vodka]</title>
+    <url>/2021/01/01/classic-2/</url>
+    <content><![CDATA[<p>我好像很久都没有更新酒类阅读的这个部分的内容了，纯粹就是因为自己在准备去读博之后， 一直都没有那么开心，也没有那么自然，每天看着的内容感觉让自己不再多这些事情有那么多 的关注了。我似乎也始终没有停止过对于自己是否应该去读博的，怀疑。可以说是对于平凡 安逸生活和漂浮不定的可能之间的抉择，又或者说是对于工作生活的精彩和读博枯燥自主生活 之间的抉择。似乎很难说这两种选择之间哪一个是更好的，而我也很难说出这两个选择之间哪一个 是更适合我的。</p>
+<a id="more"></a>
+<p>我确实是感觉，自己还是一直容易说错话，或者自己完全不知道如何开展感情生活，如何与人相处。 我不知道这种不会，不擅长是源于自己成长的环境还是源于自己不懂如何把握亲密关系，但总言之， 亲密关系或许是相当远离自己的生活范围的事情。</p>
+<p>对于这件事情的接受度大概决定了自己能否坦然地接受自己所处的状态。不能说自己是珍惜吧，相反我 觉得自己只是贪恋。在最初的时候，总是会怀疑说，选择某些人的原因会是什么，尤其是当自己逐渐 对荷尔蒙的冲动变得无动于衷的时候。但习惯的力量是相当巨大的，事态发展后我总是会贪图一些继续。 甚至采取某些意义上的，舔，的行为去维持这种熟悉感，维持这种习惯，即便我承认孤独总是一个人生活 的大主题，无论是否有其他人的陪伴。2021年的我已经27岁了，无论这快27年间我是如何度过的，这些 生活经历总是逐渐加厚了个人的性格，构成自我性格上的不断复杂。复杂不是坏事，但那些无论是一个人 的复杂还是曾能与人一块经历的复杂总是使得自我越来越难完整地呈现自己，也难以让人了解，相应地也 越来越难以去了解别人。所以何必呢，就这么接受30岁之前的自己都将会是独自一个人的事实，学会真正地 与自己相处有什么不好呢，虽然人生只有一次，但一次也不过是取舍罢了。</p>
+<p>承认自己对于亲密关系的掌控上的无能，这种悲观和无力改变的观点相反排解了我对于将会周围无所同伴的恐惧， 成为了一种自我开导。既然孤独终究会是在未来很长一段时间内的主题，那记录学习一些杂学当作对于生活的排遣 又有何不可呢。</p>
+<h2 id="伏特加-vodka">伏特加 Vodka</h2>
+<p>酒类主题的第二篇是关于<strong>伏特加 Vodka</strong>。 过去我只是知道这个酒无色无味的蒸馏酒性质，它不像Gin杜松子的独特气味， 也不像Whiskey那样丰富的原生特征，更不会有葡萄酒那样带有果类的干涩香气。一定程度上可以说它并不复杂， 书里给的评语也是，<em>neutrality</em>和<em>flavorlessness</em>。作为一种蒸馏酒，Vodka的酒精度数可以做到很高，这与普通 酒体的蒸馏过程大致相同，伏特加在蒸馏到95%左右的ABV(alcohol by volume)后，按照欧洲的法律要求加水稀释到40%的ABV。 伏特加很少陈年，因而在经典调酒中，其实一般也很难察觉到它们自身的特色，当然Martini算是个例外。但另一方面这也 意味着伏特加可以很好地衬托出其他成分的特点。按照这个整理系列的一贯做法，那么下述介绍以伏特加为基酒的经典调酒。</p>
+<h2 id="伏特加鸡尾酒">伏特加鸡尾酒</h2>
+<p>按书中的介绍，在Classic鸡尾酒，并且以伏特加为基酒，选取了以下鸡尾酒款：</p>
+<ul>
+<li><p>伏特加马天尼<a href="#martini">Martini</a> -- Martini</p></li>
+<li><p>维斯帕<a href="#vesper">Vesper</a> -- Martini</p></li>
+<li><p>莫斯科骡子<a href="#moscow-mule">Moscow Mule</a> -- Daiquiri</p></li>
+<li><p>大都会<a href="#cosmopolitan">Cosmopolitan</a> -- Sidecar</p></li>
+<li><p>螺丝起子<a href="#screwdriver">Screwdriver</a> -- Highball</p></li>
+<li><p>哈维撞墙<a href="#harvey-wallbanger">Harvey Wallbanger</a> -- Highball</p></li>
+<li><p>血腥玛丽<a href="#bloody-mary">Bloody Mary</a> -- Highball</p></li>
+<li><p>白俄罗斯<a href="#white-russian">White Russian</a> -- Flip</p></li>
+</ul>
+<h3 id="martini">Martini</h3>
+<p>由于007的代言，Martini算是一款十分知名的鸡尾酒了，这也在书中被划分为一个大类，其主要特点在于：</p>
+<ol type="1">
+<li><p>Martini常由基酒和芳香类的wine组成，基酒常用Gin或是Vodka，而芳香型酒体则常用干味美思(dry vermouth)。</p></li>
+<li><p>Martini对于基酒和芳香型酒体的比例没有特别固定的比例，这方面(balance)常常可以根据自己的喜好进行修改。</p></li>
+<li><p>Martini装饰(garnish)很大程度上影响着其整体的风味体验。装饰方面，橄榄和柠檬是最常见的。</p></li>
+</ol>
+<p>当然Martini可能更多的会用Gin做Base，但其实也不乏以Vodka作为基酒的做法。做法如下：</p>
+<div class="tabs" id="martini"><ul class="nav-tabs"><li class="tab active"><a href="#martini-1">Book's Way</a></li></ul><div class="tab-content"><div class="tab-pane active" id="martini-1"><p><strong>INGREDIENTS</strong></p>
+<ul>
+<li><p>2 ½ ounces Absolut Elyx vodka ( ≈ 45ml 伏特加 )</p></li>
+<li><p>½ ounce Dolin dry vermouth ( ≈ 15ml 干味美思 )</p></li>
+<li><p>Garnish: 1 olive ( 装饰：橄榄 )</p></li>
+</ul>
+<p><strong>METHOD</strong></p>
+<ul>
+<li><p>Stir all the ingredients over ice</p></li>
+<li><p>Strain into a chilled coupe</p></li>
+<li><p>Garnish with the olive</p></li>
+</ul></div></div></div>
+<h3 id="vesper">Vesper</h3>
+<p>同属Martini分类下，Vesper将干味美思替换为了白兰地来增加果香。酒体的主角 是Gin，但过多的Gin使得酒体缺乏复杂和韵味，因而添加Vodka来提升Gin的杜松子香， 并将Gin和白兰地更好地结合起来。</p>
+<div class="tabs" id="vesper"><ul class="nav-tabs"><li class="tab active"><a href="#vesper-1">Book's Way</a></li><li class="tab"><a href="#vesper-2">IBA's Way</a></li></ul><div class="tab-content"><div class="tab-pane active" id="vesper-1"><p><strong>INGREDIENT</strong></p>
+<ul>
+<li><p>1 ½ ounces Plymouth gin ( ≈ 45ml 琴酒 )</p></li>
+<li><p>¾ ounce Aylesbury Duck vodka ( ≈ 22.5ml 伏特加 )</p></li>
+<li><p>½ ounce Lillet blanc ( ≈ 15ml Lillet 白兰地 )</p></li>
+<li><p>Garnish: 1 lemon twist ( 装饰：柠檬 )</p></li>
+</ul>
+<p><strong>METHOD</strong></p>
+<ul>
+<li><p>Stir all the ingredients over ice</p></li>
+<li><p>Strain into a Nick&amp;Nora glass</p></li>
+<li><p>Express the lemon twist over the drink</p></li>
+<li><p>Set the lemon twist on the edge of the glass</p></li>
+</ul></div><div class="tab-pane" id="vesper-2"><p><strong>INGREDIENT</strong></p>
+<ul>
+<li><p>45 ml Gin</p></li>
+<li><p>15 ml Vodka</p></li>
+<li><p>7.5 ml Lillet Blanc</p></li>
+<li><p>Garnish: Lemon zest</p></li>
+</ul>
+<p><strong>METHOD</strong></p>
+<ul>
+<li><p>Pour all ingredients into cocktail shaker filled with ice cubes</p></li>
+<li><p>Shake and strain into a chilled cocktail glass</p></li>
+</ul></div></div></div>
+<h3 id="moscow-mule">Moscow Mule</h3>
+<p>莫斯科骡子(Moscow Mule)在书中被划分在Daiquiri类型下，柑橘类突出酸味，加上甜味 作为调和，使得酒体会显得酸甜好入口，常常也可得到一个不高的酒精度。莫斯科骡子的 突出特点在于其强烈的姜汁气味和清新感。本书中对于莫斯科骡子的做法采用的是改良的 姜汁糖浆，取代了莫斯科骡子原本的姜汁啤酒，使得其从更类似Highball的酒体变化为了 更类似Daiquiri的酒体。</p>
+<div class="tabs" id="moscow-mule"><ul class="nav-tabs"><li class="tab active"><a href="#moscow-mule-1">Book's Way</a></li><li class="tab"><a href="#moscow-mule-2">House Ginger Syrup</a></li></ul><div class="tab-content"><div class="tab-pane active" id="moscow-mule-1"><p><strong>INGREDIENTS</strong></p>
+<ul>
+<li><p>2 ounces cold seltzer (≈ 60ml 冰气泡水)</p></li>
+<li><p>2 ounces vodka (≈ 60ml 伏特加)</p></li>
+<li><p>½ ounce fresh lime juice (≈ 15ml 新鲜酸柠汁(青色那个))</p></li>
+<li><p>¾ ounce House Ginger Syrup (≈ 23ml <del>自制</del>姜汁糖浆)</p></li>
+<li><p>Garnish: 1 lime wheel and 1 piece of candied ginger on a skewer</p></li>
+</ul>
+<p><strong>METHOD</strong></p>
+<ul>
+<li><p>Pour the seltzer into a Collins glass</p></li>
+<li><p>Short shake the remaining ingredients with ice for about 5 seconds</p></li>
+<li><p>Strain into the glass</p></li>
+<li><p>Fill the glass with ice cubes</p></li>
+<li><p>Garnish with the lime wheel and candied ginger</p></li>
+</ul></div><div class="tab-pane" id="moscow-mule-2"><p><strong>INGREDIENTS</strong></p>
+<ul>
+<li><p>250 grams fresh ginger, washed and coarsely chopped</p></li>
+<li><p>About 300 grams unbleached cane sugar</p></li>
+</ul>
+<p><strong>METHOD</strong></p>
+<ul>
+<li><p>Juice the ginger and pass the juice through a fine-mesh sieve</p>
+<p>将准备好的姜打成汁，并过中等目数筛子</p></li>
+<li><p>Weigh the ginger juice, then multiply the weight by 1.5 and weigh out that much sugar</p>
+<p>根据姜汁水的重量，称出1.5倍重的糖</p></li>
+<li><p>Combine the ginger juice and sugar in a blender and process until the sugar has dissolved.</p>
+<p>将准备好的姜汁水和糖混合，搅拌直到糖全部溶解</p></li>
+<li><p>Pour into a storage container and refrigerate until ready to use, up to 2 weeks</p>
+<p>将混合后的糖浆放在容器重冷藏在冰箱重备用，保质期大概在两周左右。</p></li>
+</ul></div></div></div>
+<h3 id="cosmopolitan">Cosmopolitan</h3>
+<p>大都会(Cosmopolitan) 在书中隶属于Sidecar分类，Sidecar酒类的主角不光有基酒，更是添加了丰富的利口酒 作为补充，利口酒为酒体增加了甜味，同时又利用柑橘类的酸，使得酒体呈现出酸甜口上的平衡。</p>
+<div class="tabs" id="cosmopolitan"><ul class="nav-tabs"><li class="tab active"><a href="#cosmopolitan-1">Book's Way</a></li><li class="tab"><a href="#cosmopolitan-2">IBA's Way</a></li></ul><div class="tab-content"><div class="tab-pane active" id="cosmopolitan-1"><p><strong>INGREDIENT</strong></p>
+<ul>
+<li><p>2 ounces citrus vodka ( ≈ 60ml 柑橘味伏特加 )</p></li>
+<li><p>¾ ounce Cointreau ( ≈ 22.5ml Cointreau 利口酒 )</p></li>
+<li><p>½ ounce fresh lime juice ( ≈ 15ml 新鲜酸柠汁 )</p></li>
+<li><p>½ ounce pure, unsweetened cranberry juice ( ≈ 15ml 鲜榨蔓越莓汁 )</p></li>
+<li><p>½ ounce simple syrup ( ≈ 15ml 简单糖浆 [糖水质量1：1] )</p></li>
+<li><p>Garnish: lime wheel (装饰: 柠檬环)</p></li>
+</ul>
+<p><strong>METHOD</strong></p>
+<ul>
+<li><p>Shake all the ingredients with ice</p></li>
+<li><p>Double strain into a chilled coupe</p></li>
+<li><p>Garnish with the lime wheel</p></li>
+</ul></div><div class="tab-pane" id="cosmopolitan-2"><p><strong>INGREDIENT</strong></p>
+<ul>
+<li><p>40 ml Vodka Citron</p></li>
+<li><p>15 ml Cointreau</p></li>
+<li><p>15 ml Fresh Lime juice</p></li>
+<li><p>30 ml Cranberry juice</p></li>
+<li><p>Garnish: Lemon twist</p></li>
+</ul>
+<p><strong>METHOD</strong></p>
+<ul>
+<li><p>Add all ingredients into cocktail shaker filled with ice</p></li>
+<li><p>Shake well and strain into large cocktail glass</p></li>
+<li><p>Garnish with lemon twist</p></li>
+</ul></div></div></div>
+<h3 id="screwdriver">Screwdriver</h3>
+<p>Screwdriver(螺丝起子) 作为Highball类型中的一员(常常呈现出基酒和非酒精的混合，特别是 采用气泡水时所表现出来独特的清爽感)，没有采用气泡水，而是用柠檬汁来凸显酒体的清新。</p>
+<div class="tabs" id="screwdriver"><ul class="nav-tabs"><li class="tab active"><a href="#screwdriver-1">Book's Way</a></li></ul><div class="tab-content"><div class="tab-pane active" id="screwdriver-1"><p><strong>INGREDIENT</strong></p>
+<ul>
+<li><p>4 ounces fresh orange juice ( 120 ml 新鲜柠檬汁 )</p></li>
+<li><p>Citric Acid Solution if needed ( 有需要时加入些酸溶液提升酸度平衡甜度 )</p></li>
+<li><p>2 ounces vodka ( 60 ml 伏特加 )</p></li>
+</ul></div></div></div>
+<h3 id="harvey-wallbanger">Harvey Wallbanger</h3>
+<p>同属于Highball类，Harvey Wallbanger与Screwdriver十分相似，只是在螺丝起子的基础上添加了部分的 利口酒来增加风味和复杂性。原始版本的这款鸡尾酒将利口酒漂浮于酒体顶端呈现分层。</p>
+<div class="tabs" id="harvey-wallbanger"><ul class="nav-tabs"><li class="tab active"><a href="#harvey-wallbanger-1">Book's Way</a></li></ul><div class="tab-content"><div class="tab-pane active" id="harvey-wallbanger-1"><p><strong>INGREDIENT</strong></p>
+<ul>
+<li><p>1½ ounces Aylesbury Duck vodka ( ≈ 45 ml 伏特加 )</p></li>
+<li><p>½ ounce Galliano I'Autentico ( ≈ 15 ml Galliano利口酒 )</p></li>
+<li><p>3 ounces fresh orange juice ( 90 ml 橙子汁 )</p></li>
+<li><p>½ ounce fresh lemon juice ( 15 ml 新鲜柠檬汁 )</p></li>
+<li><p>Garnish: 1 orange half wheel ( 装饰: 半圈橙子 )</p></li>
+</ul>
+<p><strong>METHOD</strong></p>
+<ul>
+<li><p>Short shake all the ingredients with 3 ice cubes for about 5 seconds</p>
+<p>将所有准备好的成分在混合杯中与三块方冰一块摇5秒</p></li>
+<li><p>Strain into a Highball glass filled with ice</p>
+<p>将Shake完的过滤到一个装满冰块的Highball杯中</p></li>
+<li><p>Garnish with the orange half wheel</p></li>
+</ul></div></div></div>
+<h3 id="bloody-mary">Bloody Mary</h3>
+<p>血腥玛丽(Bloody Mary)也是Highball类的经典酒，这款酒最大的特色便是对西红柿的使用， 构造了"血腥"感。Bloody Mary可以当作一个样本，可以根据自己的喜好进行更改。比如"增加 Mezcal提供烟熏，或是将Vodka替换为Sherry来将降低酒精度，或是用一些自制的更多风味的伏特加"。</p>
+<div class="tabs" id="bloody-mary"><ul class="nav-tabs"><li class="tab active"><a href="#bloody-mary-1">Book's Way</a></li><li class="tab"><a href="#bloody-mary-2">IBA's Way</a></li><li class="tab"><a href="#bloody-mary-3">Bloody Mary Mix</a></li></ul><div class="tab-content"><div class="tab-pane active" id="bloody-mary-1"><p><strong>INGREDIENT</strong></p>
+<ul>
+<li><p>Kosher salt and pepper for rimming ( 盐胡椒边 )</p></li>
+<li><p>Lemon wedge ( 柠檬楔块 )</p></li>
+<li><p>2 ounces Aylesbury Duck vodka ( 60ml 伏特加 )</p></li>
+<li><p>5 ounces Basic Bloody Mary Mix ( 150ml 预制的血腥玛丽混合 )</p></li>
+<li><p>¼ ounce fresh lemon juice ( ≈ 7.5ml 新鲜柠檬汁 )</p></li>
+<li><p>Garnish: 1 lemon wedge and 1 celery stalk ( 装饰: 一块柠檬楔块和一根芹菜梗 )</p></li>
+</ul>
+<p><strong>METHOD</strong></p>
+<ul>
+<li><p>On a small plate, mix equal parts of salt and pepper</p>
+<p>在小盘中混合等质量的盐和胡椒</p></li>
+<li><p>Rub the lemon wedge along the upper ¼ inch of a pint glass, halfway around the circumference, then roll the wet portion in the salt and pepper</p>
+<p>用柠檬楔块在品脱玻璃杯顶端 ¼英尺 <del>就随便在顶部抹一下</del>湿润半圈，之后用湿润后的部分沾上盐胡椒</p></li>
+<li><p>Fill the glass with ice cubes</p>
+<p>在杯中加满冰块</p></li>
+<li><p>Add the remaining ingredients and stir a few times</p>
+<p>将其他部分加入杯中并搅拌几次</p></li>
+<li><p>Garnish with the lemon wedge and celery stalk</p>
+<p>用柠檬楔块和芹菜梗装饰</p></li>
+</ul></div><div class="tab-pane" id="bloody-mary-2"><p><strong>INGREDIENT</strong></p>
+<ul>
+<li><p>45 ml Vodka</p></li>
+<li><p>90 ml Tomato juice (番茄汁)</p></li>
+<li><p>15 ml Fresh lemon juice</p></li>
+<li><p>2 dashes Worcestershire Sauce (伍斯特群酱)</p></li>
+<li><p>Tabasco: Crlery Salt, Pepper</p></li>
+</ul>
+<p><strong>METHOD</strong></p>
+<ul>
+<li>Stir gently all the ingredients in a mixing glass with ice, pour into rocks glass</li>
+</ul></div><div class="tab-pane" id="bloody-mary-3"><p><strong>INGREDIENT</strong></p>
+<ul>
+<li><p>1100 grams organic tomato juice ( 1100g 番茄汁 )</p></li>
+<li><p>180 grams Worcestershire sauce ( 180g 伍斯特群酱 )</p></li>
+<li><p>30 grams Magi seasoning ( 30g 美极 )</p></li>
+<li><p>72 grams strained fresh lemon juice ( 72g 过滤后的新鲜柠檬汁 )</p></li>
+<li><p>30 grams Tapatio hot sauce ( 30g 辣开胃酱 )</p></li>
+</ul>
+<p><strong>METHOD</strong></p>
+<ul>
+<li><p>Place all the ingredients in a bowl and stire to combine</p></li>
+<li><p>Transfer to a storage container and refrigenrate until ready to use, up to 1 week</p></li>
+</ul></div></div></div>
+<h3 id="white-russian">White Russian</h3>
+<p>本节伏特加基酒的鸡尾酒中少数的属于Flip类。Flip类酒常常使用鸡蛋，奶油，椰奶或是厚重的利口酒和糖浆， 成为其一大特点(有点奶茶中奶盖的意思)。白俄罗斯厚重的奶油和咖啡混合使得这款酒更像是一种日常的饮品。</p>
+<div class="tabs" id="white-russian"><ul class="nav-tabs"><li class="tab active"><a href="#white-russian-1">Book's Way</a></li></ul><div class="tab-content"><div class="tab-pane active" id="white-russian-1"><p><strong>INGREDIENT</strong></p>
+<ul>
+<li><p>1 ½ ounces Absolut Elyx vodka ( ≈ 45 ml 伏特加 )</p></li>
+<li><p>1 ounce Caffé Lolita coffee liqueur ( 30 ml 咖啡利口酒 )</p></li>
+<li><p>1 ounce half-and-half ( half-and-half: 等量的奶油和牛奶的混合 )</p></li>
+<li><p>Garnish: 3 coffee beans ( 装饰: 3颗咖啡豆 )</p></li>
+</ul>
+<p><strong>METHOD</strong></p>
+<ul>
+<li><p>Combine the vodka and liqueur in a double Old-Fashioned glass</p>
+<p>在一个双层Old-Fashioned杯中混合伏特加和利口酒</p></li>
+<li><p>Fill the glass with ice cubes and stir briefly</p>
+<p>于杯中填满冰块并少许搅拌</p></li>
+<li><p>Layer the half-and-half on top</p>
+<p>在顶部倒入half-and-half(制作奶盖)</p></li>
+<li><p>Garnish with the coffee beans</p>
+<p>用咖啡豆做装饰</p></li>
+</ul></div></div></div>
 ]]></content>
       <categories>
         <category>Life</category>

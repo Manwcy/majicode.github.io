@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
         next    : '<i class="fa fa-angle-right"></i>'
       },
       cssClasses: {
-        list        : ['pagination', 'algolia-pagination'],
+        root        : 'pagination',
         item        : 'pagination-item',
         link        : 'page-number',
         selectedItem: 'current',
@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
   document.querySelector('.popup-btn-close').addEventListener('click', onPopupClose);
-  document.addEventListener('pjax:success', onPopupClose);
+  window.addEventListener('pjax:success', onPopupClose);
   window.addEventListener('keyup', event => {
     if (event.key === 'Escape') {
       onPopupClose();

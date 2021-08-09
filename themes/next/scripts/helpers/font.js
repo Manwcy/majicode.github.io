@@ -2,11 +2,13 @@
 
 'use strict';
 
-hexo.extend.helper.register('next_font', function() {
-  const config = this.theme.font;
+hexo.extend.helper.register('next_font', () => {
+  const config = hexo.theme.config.font;
 
   if (!config || !config.enable) return '';
 
+  const fontDisplay = '&display=swap';
+  const fontSubset = '&subset=latin,latin-ext';
   const fontStyles = ':300,300italic,400,400italic,700,700italic';
   const fontHost = config.host || '//fonts.googleapis.com';
 
@@ -16,10 +18,12 @@ hexo.extend.helper.register('next_font', function() {
       return config[item].family + fontStyles;
     }
     return '';
-  }).filter(item => item !== '');
+  });
 
-  fontFamilies = [...new Set(fontFamilies)].join('|');
+  fontFamilies = fontFamilies.filter(item => item !== '');
+  fontFamilies = [...new Set(fontFamilies)];
+  fontFamilies = fontFamilies.join('|');
 
   // Merge extra parameters to the final processed font string
-  return fontFamilies ? `<link rel="stylesheet" href="${fontHost}/css?family=${fontFamilies}&display=swap&subset=latin,latin-ext">` : '';
+  return fontFamilies ? `<link rel="stylesheet" href="${fontHost}/css?family=${fontFamilies.concat(fontDisplay, fontSubset)}">` : '';
 });

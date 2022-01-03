@@ -23,6 +23,6 @@ jobs:
         sed -i "s/BLOG_ACCESS_TOKEN/$BLOG_ACCESS_TOKEN/g" ./_config.yml
     - name: Hexo
       run: |
-        npm i -g Hexo-cli
+        npm i -g hexo-cli
         npm i
         Hexo clean && Hexo g && Hexo d

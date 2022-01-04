@@ -3,7 +3,7 @@ name: BlogCI
 on:
   push:
     branches:
-      - master
+      - sources
 
 env:
   GIT_USER: Manwcy

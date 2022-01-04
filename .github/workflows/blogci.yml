@@ -63,12 +63,10 @@ jobs:
           npm i -g hexo-cli
           npm i gulp
           npm i gulp-shell
-          npm i hexo-renderer-pandoc
           npm i
-
-#     - name: Install Pandoc
-#       run: |
-#       curl -s -L https://github.com/jgm/pandoc/releases/download/2.9.2/pandoc-2.9.2-linux-amd64.tar.gz | tar xvzf - -C $RUNNER_TOOL_CACHE/
+          wget https://github.com/jgm/pandoc/releases/download/2.10.1/pandoc-2.10.1-1-amd64.deb
+          sudo dpkg -i pandoc-2.10.1-1-amd64.deb
+          npm install hexo-renderer-pandoc --save  # for mathjax
 
       - name: Deploy hexo
         run: |

@@ -1,4 +1,4 @@
-name: BlogCI
+name: BlogCI_MJ
 
 on:
   push:

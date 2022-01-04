@@ -63,7 +63,12 @@ jobs:
           npm i -g hexo-cli
           npm i gulp
           npm i gulp-shell
+          npm i hexo-renderer-pandoc
           npm i
+
+#     - name: Install Pandoc
+#       run: |
+#       curl -s -L https://github.com/jgm/pandoc/releases/download/2.9.2/pandoc-2.9.2-linux-amd64.tar.gz | tar xvzf - -C $RUNNER_TOOL_CACHE/
 
       - name: Deploy hexo
         run: |

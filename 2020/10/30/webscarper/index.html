@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.1">
+<meta name="generator" content="Hexo 6.0.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -28,7 +28,7 @@
 <meta property="og:description" content="Start to learn how to build and utilize web scraper. Here are some notes from book, &quot;Web Scraping with Python&quot; by Ryan Mitchell">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-10-30T01:24:00.000Z">
-<meta property="article:modified_time" content="2022-01-04T04:46:29.047Z">
+<meta property="article:modified_time" content="2022-01-04T05:43:32.450Z">
 <meta property="article:author" content="M">
 <meta property="article:tag" content="Python">
 <meta property="article:tag" content="Webscarper">
@@ -182,7 +182,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-01-04 12:46:29" itemprop="dateModified" datetime="2022-01-04T12:46:29+08:00">2022-01-04</time>
+                <time title="Modified: 2022-01-04 13:43:32" itemprop="dateModified" datetime="2022-01-04T13:43:32+08:00">2022-01-04</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -213,7 +213,7 @@
 
       
         <p>Start to learn how to build and utilize web scraper.</p>
-<p>Here are some notes from book, "Web Scraping with Python" by Ryan Mitchell <a id="more"></a></p>
+<p>Here are some notes from book, "Web Scraping with Python" by Ryan Mitchell <span id="more"></span></p>
 <h1 id="building-scrapers">Building Scrapers</h1>
 <h2 id="first-web-scraper">First Web Scraper</h2>
 <p>General public tends to think of 'web scrapers' as:</p>
@@ -325,7 +325,7 @@ find(tag, attributes, recursive, text, keywords)</code></pre>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true"></a></span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true"></a>html <span class="op">=</span> urlopen(<span class="st">&quot;http://en.wikipedia.org/wiki/Kevin_Bacon&quot;</span>)</span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true"></a>bsObj <span class="op">=</span> BeautifulSoup(html)</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true"></a><span class="cf">for</span> link <span class="kw">in</span> bsObj.find(<span class="st">&quot;div&quot;</span>, {<span class="st">&quot;id&quot;</span>:<span class="st">&quot;bodyContent&quot;</span>}).findAll(<span class="st">&quot;a&quot;</span>,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true"></a><span class="cf">for</span> link <span class="kw">in</span> bsObj.find(<span class="st">&quot;div&quot;</span>, &#123;<span class="st">&quot;id&quot;</span>:<span class="st">&quot;bodyContent&quot;</span>&#125;).findAll(<span class="st">&quot;a&quot;</span>,</span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true"></a>                       href<span class="op">=</span>re.<span class="bu">compile</span>(<span class="st">&quot;^(/wiki)((?!:).)*$&quot;</span>))</span>
 <span id="cb7-9"><a href="#cb7-9" aria-hidden="true"></a>    <span class="cf">if</span> <span class="st">&#39;href&#39;</span> <span class="kw">in</span> link.attrs:</span>
 <span id="cb7-10"><a href="#cb7-10" aria-hidden="true"></a>        <span class="bu">print</span>(link.attrs[<span class="st">&#39;href&#39;</span>])</span></code></pre></div>
@@ -345,7 +345,7 @@ find(tag, attributes, recursive, text, keywords)</code></pre>
 <span id="cb8-8"><a href="#cb8-8" aria-hidden="true"></a><span class="kw">def</span> getLinks(articleUrl):</span>
 <span id="cb8-9"><a href="#cb8-9" aria-hidden="true"></a>    html <span class="op">=</span> urlopen(<span class="st">&quot;http://en.wikipedia.org&quot;</span><span class="op">+</span>articleUrl)</span>
 <span id="cb8-10"><a href="#cb8-10" aria-hidden="true"></a>    bsObj <span class="op">=</span> BeautifulSoup(html)</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true"></a>    <span class="cf">return</span> bsObj.find(<span class="st">&quot;div&quot;</span>, {<span class="st">&quot;id:bodyContent&quot;</span>}).findAll(<span class="st">&quot;a&quot;</span>, href<span class="op">=</span>re.<span class="bu">compile</span>(<span class="st">&quot;^(/wiki/)((?!:).)*$&quot;</span>))</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true"></a>    <span class="cf">return</span> bsObj.find(<span class="st">&quot;div&quot;</span>, &#123;<span class="st">&quot;id:bodyContent&quot;</span>&#125;).findAll(<span class="st">&quot;a&quot;</span>, href<span class="op">=</span>re.<span class="bu">compile</span>(<span class="st">&quot;^(/wiki/)((?!:).)*$&quot;</span>))</span>
 <span id="cb8-12"><a href="#cb8-12" aria-hidden="true"></a>links <span class="op">=</span> getLinks(<span class="st">&quot;/wiki/Kevin_Bacon&quot;</span>)</span>
 <span id="cb8-13"><a href="#cb8-13" aria-hidden="true"></a><span class="cf">while</span> <span class="bu">len</span>(links) <span class="op">&gt;</span> <span class="dv">0</span>:</span>
 <span id="cb8-14"><a href="#cb8-14" aria-hidden="true"></a>    newArticle <span class="op">=</span> links[random.randint(<span class="dv">0</span>, <span class="bu">len</span>(links)<span class="op">-</span><span class="dv">1</span>)].attrs[<span class="st">&quot;href&quot;</span>]</span>
@@ -449,7 +449,7 @@ find(tag, attributes, recursive, text, keywords)</code></pre>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-count">9</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -460,7 +460,7 @@ find(tag, attributes, recursive, text, keywords)</code></pre>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

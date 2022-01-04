@@ -20,7 +20,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        node_version: [12.x]
+        node_version: [16.x]
 
     steps:
       - name: Checkout
@@ -60,8 +60,9 @@ jobs:
 
       - name: Install dependencies
         run: |
-          npm install
+          npm i -g hexo-cli
+          npm i
 
       - name: Deploy hexo
         run: |
-          npm run deploy
+          hexo clean && hexo g && hexo deploy

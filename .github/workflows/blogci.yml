@@ -8,7 +8,7 @@ on:
 
 env:
   GIT_USER: Manwcy
-  GIT_EMAIL:junnan0ma@gmail.com
+  GIT_EMAIL: junnan0ma@gmail.com
   THEME_REPO: theme_next/hexo-theme-next
   THEME_BRANCH: master
   DEPLOY_REPO: Manwcy/manwcy.github.io

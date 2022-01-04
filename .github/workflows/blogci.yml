@@ -1,4 +1,3 @@
-name: BlogCI
 name: MyBlog_CI
 
 on:

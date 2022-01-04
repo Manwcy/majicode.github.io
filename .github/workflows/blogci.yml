@@ -1,4 +1,4 @@
-name: MyBlog_CI
+name: BlogCI
 
 on:
   push:

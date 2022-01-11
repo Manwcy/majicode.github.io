@@ -88,25 +88,34 @@ sudo apt install mailutils
     smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd
     smtp_sasl_security_options = noanonymous
     ```
+
     保存退出即可。这里进行的设置包括：
-    `smtp_sasl_auth_enable`: 启用sasl身份验证
-    `smtp_sasl_passwd_maps`: 设置用户名密码发送要邮件中转服务器
-    `smtp_tls_security_level`: 加密传输过程
-    `smtp_sasl_security_options`: SMTP安全选项 
-        `noanonymous`:仅允许相互认证的方法
+
+    - `smtp_sasl_auth_enable`: 启用sasl身份验证
+
+    - `smtp_sasl_passwd_maps`: 设置用户名密码发送要邮件中转服务器
+
+    - `smtp_tls_security_level`: 加密传输过程
+
+    - `smtp_sasl_security_options`: SMTP安全选项 
+         `noanonymous`:仅允许相互认证的方法
 
 4. 设置sasl凭据，即用户名密码
 
     ```
     sudo vim /etc/postfix/sasl_passwd
     ```
+
     这部分设置自己的gmail账号密码用来验证，格式大概是这样的
+
     ```
     # destination credentials
     #[smtp.domain.name] username:password
     [smtp.gmail.com]:587 [email account]:password
     ```
+
     由于这部分内容比较重要，保护一下，所以限制一下文件的读取权限：
+
     ```
     sudo chown root:root /etc/postfix/sasl_passwd
     sudo chmod 600 /etc/postfix/sasl_passwd

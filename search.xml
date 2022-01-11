@@ -889,10 +889,22 @@ inet_protocols = all
 smtp_sasl_auth_enable = yes
 smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd
 smtp_sasl_security_options = noanonymous</code></pre>
-<p>保存退出即可。这里进行的设置包括： <code>smtp_sasl_auth_enable</code>: 启用sasl身份验证 <code>smtp_sasl_passwd_maps</code>: 设置用户名密码发送要邮件中转服务器 <code>smtp_tls_security_level</code>: 加密传输过程 <code>smtp_sasl_security_options</code>: SMTP安全选项 <code>noanonymous</code>:仅允许相互认证的方法</p></li>
+<p>保存退出即可。这里进行的设置包括：</p>
+<ul>
+<li><p><code>smtp_sasl_auth_enable</code>: 启用sasl身份验证</p></li>
+<li><p><code>smtp_sasl_passwd_maps</code>: 设置用户名密码发送要邮件中转服务器</p></li>
+<li><p><code>smtp_tls_security_level</code>: 加密传输过程</p></li>
+<li><p><code>smtp_sasl_security_options</code>: SMTP安全选项 <code>noanonymous</code>:仅允许相互认证的方法</p></li>
+</ul></li>
 <li><p>设置sasl凭据，即用户名密码</p>
 <pre><code>sudo vim /etc/postfix/sasl_passwd</code></pre>
-<p>这部分设置自己的gmail账号密码用来验证，格式大概是这样的 <code># destination credentials  #[smtp.domain.name] username:password  [smtp.gmail.com]:587 [email account]:password</code> 由于这部分内容比较重要，保护一下，所以限制一下文件的读取权限： <code>sudo chown root:root /etc/postfix/sasl_passwd  sudo chmod 600 /etc/postfix/sasl_passwd</code></p></li>
+<p>这部分设置自己的gmail账号密码用来验证，格式大概是这样的</p>
+<pre><code># destination credentials
+#[smtp.domain.name] username:password
+[smtp.gmail.com]:587 [email account]:password</code></pre>
+<p>由于这部分内容比较重要，保护一下，所以限制一下文件的读取权限：</p>
+<pre><code>sudo chown root:root /etc/postfix/sasl_passwd
+sudo chmod 600 /etc/postfix/sasl_passwd</code></pre></li>
 <li><p>转换密码文件为数据库</p></li>
 </ol>
 <pre><code>postmap /etc/postfix/sasl_passwd</code></pre>

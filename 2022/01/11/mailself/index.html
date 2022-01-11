@@ -20,20 +20,21 @@
     var CONFIG = {"hostname":"manwcy.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="2022-01-04, 过完了元旦，李子文从这边搬了出去。">
+  <meta name="description" content="近期一直在星巴克坐着，远程登陆着家里的Linux做一些计算，由于时常需要远程登录 做些计算，更是时不时需要自己登陆上去查看计算结果，突然想到，如果可以在家里的 计算完成后，脚本自动给我推送一个通知，或是给我发个邮件提醒我已经计算完成了， 好像听上去很美好的样子。本着这个想法，我搜索了一下相关的信息，果然有这方面的 内容，自己觉得很有意思，就拿着一块记录一下具体的实现方法好了。但自己也不太常 用wi">
 <meta property="og:type" content="article">
-<meta property="og:title" content="分手后的一些反思-1">
-<meta property="og:url" content="https://manwcy.github.io/2022/01/04/thinkings-1/index.html">
+<meta property="og:title" content="How to mail myself on Linux or Mac when a Job is Done">
+<meta property="og:url" content="https://manwcy.github.io/2022/01/11/mailself/index.html">
 <meta property="og:site_name" content="M">
-<meta property="og:description" content="2022-01-04, 过完了元旦，李子文从这边搬了出去。">
+<meta property="og:description" content="近期一直在星巴克坐着，远程登陆着家里的Linux做一些计算，由于时常需要远程登录 做些计算，更是时不时需要自己登陆上去查看计算结果，突然想到，如果可以在家里的 计算完成后，脚本自动给我推送一个通知，或是给我发个邮件提醒我已经计算完成了， 好像听上去很美好的样子。本着这个想法，我搜索了一下相关的信息，果然有这方面的 内容，自己觉得很有意思，就拿着一块记录一下具体的实现方法好了。但自己也不太常 用wi">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-01-04T05:41:02.000Z">
+<meta property="article:published_time" content="2022-01-11T04:36:33.000Z">
 <meta property="article:modified_time" content="2022-01-11T10:06:29.439Z">
 <meta property="article:author" content="M">
-<meta property="article:tag" content="Blog">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="Bash">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://manwcy.github.io/2022/01/04/thinkings-1/">
+<link rel="canonical" href="https://manwcy.github.io/2022/01/11/mailself/">
 
 
 <script id="page-configurations">
@@ -46,7 +47,7 @@
   };
 </script>
 
-  <title>分手后的一些反思-1 | M</title>
+  <title>How to mail myself on Linux or Mac when a Job is Done | M</title>
   
 
 
@@ -151,7 +152,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://manwcy.github.io/2022/01/04/thinkings-1/">
+    <link itemprop="mainEntityOfPage" href="https://manwcy.github.io/2022/01/11/mailself/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -164,7 +165,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          分手后的一些反思-1
+          How to mail myself on Linux or Mac when a Job is Done
         </h1>
 
         <div class="post-meta">
@@ -173,23 +174,17 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2022-01-04 13:41:02" itemprop="dateCreated datePublished" datetime="2022-01-04T13:41:02+08:00">2022-01-04</time>
+              <time title="Created: 2022-01-11 12:36:33 / Modified: 18:06:29" itemprop="dateCreated datePublished" datetime="2022-01-11T12:36:33+08:00">2022-01-11</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-01-11 18:06:29" itemprop="dateModified" datetime="2022-01-11T18:06:29+08:00">2022-01-11</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Life/" itemprop="url" rel="index"><span itemprop="name">Life</span></a>
+                  <a href="/categories/Tech/" itemprop="url" rel="index"><span itemprop="name">Tech</span></a>
                 </span>
             </span>
 
@@ -199,7 +194,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>1.3k</span>
+              <span>2.5k</span>
             </span>
 
         </div>
@@ -211,21 +206,85 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>2022-01-04, 过完了元旦，李子文从这边搬了出去。 <span id="more"></span></p>
-<p>大概有那么几个问题是别人一直在问我但是我自己一直也没办法给出特别好的回答的。</p>
-<h2 id="为什么一定要跟李子文分手">为什么一定要跟李子文分手</h2>
-<p>这不光是李子文一直在追问我的，也是森小渣一直在追问我的。为什么一定要以这种形式， 双方继续在一块不好吗。</p>
-<p>这确实是一个很难回答的问题，算是在质问我选择本身的一种正当性。是啊，我之前是一直 觉得说双方在这个问题上没有办法继续解决了，或者说我自己放弃继续解决了，所以才会选择 分开，一定程度上来说也是因为感觉到自己在这个过程中变得越来越被约束，越来越狭隘， 缺乏了自己所能够认同的、自我的追求了。但其实苛责李子文对我的这种自我追求的缺失是十分 不公平的。会比较算是我自身的原因，如果自己可以在白天的时候多进行一些这方面的、有计划的、 有准备的研究活动的话，应该不至于会走到这样的地步，不至于会需要向李子文去争抢的。</p>
-<p>当李子文从外面坐车回来的时候，说实话感性给予自己的力量远远大于了理性约束自己的力量。 有时候大家都在告诉你，你需要的是多让自己心中的野兽跑出来一下，但生活不是只有感性对人的 影响。我看到了李子文心里对于感情的追求，以及这种追求上极强的个人力量，她会愿意去放弃 自己的脸面，愿意去接受对方，愿意去让自己置身在一个危险的境地中，哪怕是去追逐一些自己 或许没有丝毫把握的事情，仅仅是因为她自己对感情有足够的勇气，有足够的力量，有足够的不甘心。 从这点上来说，我确实配不上她的这种毫无保留的爱，有多少人能够配得上呢，这么简单纯粹的爱。</p>
-<h2 id="结果需要选择撕扯">结果需要选择撕扯</h2>
-<p>我搬出了王逸辰，彻底伤害了她。也算是有一次不是自己只有在感觉自己在被伤害，感觉自己在体验。 变成了我自己给予了别人伤害。我一直都有一个认识在于，自己会完全放下了过往才会重新开始接受 接下来的感情。在这点上我试图去让自己对得起别人的感情，也对得起自己的感情。但我也没有想到这次 我需要去假设自己需要动用什么样的力量去让别人对感情死心，显得那么地冷酷和残忍。</p>
-<h2 id="后续">后续</h2>
-<p>昨天晚上睡在沙发上的时候，我似乎总是没有睡的很好，迷迷糊糊中会把那只猫咪当作是李子文，特别是 当晚上猫咪在我周围走来走去的时候，似乎就感觉是她又冒着伤害自己的风险回来了。我真的不知道下次 如果再发生了一样的事情，我是否还能那么忍心，去做到那么残忍。</p>
-<p>从心底里来说，我对于李子文真的有那么多的感谢。当晚上少了她在周围“马俊男～马俊男“地呼唤的时候， 倒是真的感觉日子冷清了许多。即便心里对如此已经有一定的预期了，还是感觉似乎这种冷冷清清的日子 还真是会让人感觉那么地孤寂。</p>
-<p>谢谢你会给我你那么简单而直接的爱，谢谢你会愿意冒着自己受伤害的风险去奔向我。我对伤害了你真的好 愧疚，真的好自责。我可以屈从理性对于自己的教导，也是相信理性能够指引自己前往一些自己原本无法达到的 地方，但感性上而言，我还没有那么残忍，那么忍心眼睁睁地受那些伤害，但应该就像他们说的那样，如果 我足够值得的话，我不应该舍得让你受伤的。</p>
-<p>或许这样的自己早晚会在这个事情上偿还的。李子文你值得更好的一个人，对你更好会像你一样抛下自己， 全力以赴地双方互相奔赴的人，而我配不上这样的感情。</p>
-<p>如果可以看到你之后幸福的样子，我也会很开心的，否则我不知道我能不能原谅自己。</p>
-<p>祝你幸福。。。</p>
+        <p>近期一直在星巴克坐着，远程登陆着家里的Linux做一些计算，由于时常需要远程登录 做些计算，更是时不时需要自己登陆上去查看计算结果，突然想到，如果可以在家里的 计算完成后，脚本自动给我推送一个通知，或是给我发个邮件提醒我已经计算完成了， 好像听上去很美好的样子。本着这个想法，我搜索了一下相关的信息，果然有这方面的 内容，自己觉得很有意思，就拿着一块记录一下具体的实现方法好了。但自己也不太常 用windows系统了，因此主要能在linux和mac下能跑通就可以啦，更何况如果可以发邮件 的话，系统倒是无所谓了，当然如果mac能有接口直接进行通知，或者推送到我手机上， 就更好不过了。</p>
+<span id="more"></span>
+<h2 id="发送邮件">发送邮件</h2>
+<h3 id="ubuntu">Ubuntu</h3>
+<h4 id="依赖">1. 依赖</h4>
+<ol type="1">
+<li>需要安装<code>postfix</code>和<code>mailutils</code>， 不过用<code>apt</code>安装的<code>mailutils</code>的时候会自动安装<code>postfix</code>，所以只安装<code>mailutils</code>也行。</li>
+</ol>
+<pre class="shell"><code>#不放心的话可以先安装这个
+#sudo apt install postfix
+sudo apt install mailutils</code></pre>
+<ol start="2" type="1">
+<li><p>安装<code>postfix</code>的时候会出现一个对话框，<code>tab</code>才能移动到<code>ok</code>。直接选择<code>ok</code>和<code>internet site</code>去使用网络服务[SMTP: Simple Mail Transportation Protocol]就可以了</p></li>
+<li><p>名称随便设置就可以了</p></li>
+<li><p>这个设置对话框可以通过</p>
+<pre class="shell"><code>dpkg-reconfigure postfix</code></pre>
+<p>重新进行配置</p></li>
+<li><p>此时已经可以通过<code>mail</code>命令发送邮件了，发出方会是<code>$USER $MACHINE</code> 这样，但是这样的话会被邮件系统认为是垃圾邮件，不方便进行查看，所以需要一个网络服务商进行邮件中转</p>
+<pre class="shell"><code>mail -s &quot;topic&quot; destination@xxx.com &lt;&lt;&lt; str
+echo &quot;string&quot; | mail -s &quot;topic&quot; destination@xxx.com</code></pre></li>
+</ol>
+<h4 id="配置postfix以使用gmail作为中转relaysmtp">2. 配置postfix以使用gmail作为中转(Relay)【SMTP】</h4>
+<ol type="1">
+<li><p>可以通过<code>postconf</code>查看当前<code>postfix</code>的配置值</p></li>
+<li><p>首先修改中转服务器地址：</p>
+<pre><code>sudo vim /etc/postfix/main.cf
+</code></pre>
+<p>搜索到<code>relayhost =</code>，这个就是用来设置Gmail STMP域名 <code>...  relayhost = [smtp.gmail.com]:587  mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128  ...</code></p></li>
+<li><p>配置sasl身份验证</p>
+<pre><code>...
+relayhost = [smtp.gmail.com]:587
+...
+smtp_tls_CApath=/etc/ssl/certs
+#smtp_tls_security_level=may
+smtp_tls_security_level=encrypt
+smtp_tls_session_cache_database = btree:$&#123;data_directory&#125;/smtp_scache
+...
+recipient_delimiter = +
+inet_interfaces = all
+inet_protocols = all
+smtp_sasl_auth_enable = yes
+smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd
+smtp_sasl_security_options = noanonymous</code></pre>
+<p>保存退出即可。这里进行的设置包括： <code>smtp_sasl_auth_enable</code>: 启用sasl身份验证 <code>smtp_sasl_passwd_maps</code>: 设置用户名密码发送要邮件中转服务器 <code>smtp_tls_security_level</code>: 加密传输过程 <code>smtp_sasl_security_options</code>: SMTP安全选项 <code>noanonymous</code>:仅允许相互认证的方法</p></li>
+<li><p>设置sasl凭据，即用户名密码</p>
+<pre><code>sudo vim /etc/postfix/sasl_passwd</code></pre>
+<p>这部分设置自己的gmail账号密码用来验证，格式大概是这样的 <code># destination credentials  #[smtp.domain.name] username:password  [smtp.gmail.com]:587 [email account]:password</code> 由于这部分内容比较重要，保护一下，所以限制一下文件的读取权限： <code>sudo chown root:root /etc/postfix/sasl_passwd  sudo chmod 600 /etc/postfix/sasl_passwd</code></p></li>
+<li><p>转换密码文件为数据库</p></li>
+</ol>
+<pre><code>postmap /etc/postfix/sasl_passwd</code></pre>
+<ol start="6" type="1">
+<li>检查设置</li>
+</ol>
+<p>差不多已经完成了，最后检查一下配置是否有错误</p>
+<pre><code>postfix check</code></pre>
+<p>这里可以忽略这么一条警告：</p>
+<pre><code>postfix/postfix-script: warning: symlink leaves directory:
+/etc/postfix/./makedefs.out</code></pre>
+<ol start="7" type="1">
+<li>重启<code>postfix</code> 最后重启<code>postfix</code>即可，差不多就完成了。</li>
+</ol>
+<pre><code>sudo systemctl restart postfix 
+sudo systemctl status postfix</code></pre>
+<ol start="8" type="1">
+<li>测试邮件</li>
+</ol>
+<pre><code>echo &quot;Test Postfix Gmail SMTP Relay&quot; | mail -s &quot;Postfix Gmail SMTP Relay&quot; [email
+protected]</code></pre>
+<p>以上是一个测试邮件，应该可以绕过邮件系统的垃圾邮件检测了！增加一个日志系统来检查 邮件的发送情况：</p>
+<pre><code>tail /var/log/mail.log</code></pre>
+<ol start="9" type="1">
+<li>错误： 如果存在错误：</li>
+</ol>
+<pre><code>...status=deferred (SASL authentication failed; server smtp.gmail.com[74.125.133.108] said: 535-5.7.8 Username and Password not accepted.</code></pre>
+<p>这个是gmail的身份验证，gmail默认开启的安全性较高的应用程序访问，这里可以修改。</p>
+<p><a target="_blank" rel="noopener" href="https://myaccount.google.com/lesssecureapps">安全性较低的应用程序访问</a></p>
+<ol start="10" type="1">
+<li>完成！</li>
+</ol>
 
     </div>
 
@@ -235,7 +294,8 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Blog/" rel="tag"># Blog</a>
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+              <a href="/tags/Bash/" rel="tag"># Bash</a>
           </div>
 
         
@@ -244,13 +304,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2022/01/04/hexogithubaction4ci/" rel="prev" title="Hexo(Theme-Next) Using Github Actions as CI">
-      <i class="fa fa-chevron-left"></i> Hexo(Theme-Next) Using Github Actions as CI
+    <a href="/2022/01/05/Suggestions/" rel="prev" title="减脂（初期大体重）饮食建议【未整理版】">
+      <i class="fa fa-chevron-left"></i> 减脂（初期大体重）饮食建议【未整理版】
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2022/01/05/Suggestions/" rel="next" title="减脂（初期大体重）饮食建议【未整理版】">
-      减脂（初期大体重）饮食建议【未整理版】 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -309,7 +366,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%80%E5%AE%9A%E8%A6%81%E8%B7%9F%E6%9D%8E%E5%AD%90%E6%96%87%E5%88%86%E6%89%8B"><span class="nav-number">1.</span> <span class="nav-text">为什么一定要跟李子文分手</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E6%9E%9C%E9%9C%80%E8%A6%81%E9%80%89%E6%8B%A9%E6%92%95%E6%89%AF"><span class="nav-number">2.</span> <span class="nav-text">结果需要选择撕扯</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8E%E7%BB%AD"><span class="nav-number">3.</span> <span class="nav-text">后续</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6"><span class="nav-number">1.</span> <span class="nav-text">发送邮件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ubuntu"><span class="nav-number">1.1.</span> <span class="nav-text">Ubuntu</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%9D%E8%B5%96"><span class="nav-number">1.1.1.</span> <span class="nav-text">1. 依赖</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEpostfix%E4%BB%A5%E4%BD%BF%E7%94%A8gmail%E4%BD%9C%E4%B8%BA%E4%B8%AD%E8%BD%ACrelaysmtp"><span class="nav-number">1.1.2.</span> <span class="nav-text">2. 配置postfix以使用gmail作为中转(Relay)【SMTP】</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
